@@ -16,6 +16,8 @@ CORS(app)
 
 # Configurar MongoDB
 app.config['MONGO_URI'] = os.getenv('MONGO_URI')
+print("MONGO_URI:", app.config['MONGO_URI'])  # SOLO PARA DEBUG
+
 mongo.init_app(app)
 
 # Inicializar SocketIO
