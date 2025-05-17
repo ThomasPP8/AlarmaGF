@@ -62,3 +62,16 @@ def update_registro(id):
 
     except Exception as e: # Manejar excepciones
         return jsonify({'error': str(e)}), 400
+
+# Funcion para eliminar un registro
+def delete_registro(id):
+    try:
+        response = mongo.db.registros.delete_one({'_id': ObjectId(id)}) # Eliminar el registro
+
+        if response.deleted_count == 0: # Verificar si se encontró el registro
+            return jsonify({'error': 'Registro no encontrado'}), 404
+
+        return jsonify({'message': 'Registro eliminado'}), 200
+
+    except Exception as e: # Manejar excepciones
+        return jsonify({'error': str(e)}), 400

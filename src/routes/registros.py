@@ -5,6 +5,7 @@ from services.services import (
     get_all_registros,
     get_registro_by_id,
     update_registro,
+    delete_registro
 )
 
 registros_bp = Blueprint('registros', __name__)
@@ -32,4 +33,4 @@ def actualizar_registro(id):  # <- aquí se añadió `id`
 # Eliminar registro
 @registros_bp.route('/<id>', methods=['DELETE'])
 def eliminar_registro(id):  # <- aquí también
-    return f"eliminar registro con ID: {id}"
+    return delete_registro(id)
