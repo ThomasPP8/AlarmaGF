@@ -1,5 +1,5 @@
 from flask import Blueprint
-from services.services import create_registro, get_all_registros
+from services.services import create_registro, get_all_registros, get_registro_by_id
 
 registros_bp = Blueprint('registros', __name__)
 
@@ -11,7 +11,7 @@ def obtener_todos_los_registros():
 # Obtener un registro por id
 @registros_bp.route('/<id>', methods=['GET'])
 def obtener_registro_por_id(id):
-    return f"Registro con ID: {id}"
+    return get_registro_by_id(id)
 
 # Crear un registro
 @registros_bp.route('/', methods=['POST'])

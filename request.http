@@ -10,3 +10,6 @@ Content-Type: application/json
 
 ###
 GET http://localhost:5000/registros HTTP/1.1
+
+###
+GET http://localhost:5000/registros/6828ab015dc8fbbe14e0ee1b HTTP/1.1

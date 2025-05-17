@@ -1,5 +1,5 @@
 from flask import request, jsonify, Response
-from bson import json_util
+from bson import json_util, ObjectId
 
 from config.mongodb import mongo
 
@@ -33,3 +33,8 @@ def get_all_registros():
     return Response(result, mimetype='application/json') # Devolver la respuesta como JSON
     #return result, 200
     
+# Funcion para obtener un registro por id
+def get_registro_by_id(id):
+    data = mongo.db.registros.find_one({'_id': ObjectId(id)})
+    result = json_util.dumps(data) # Convertir a JSON
+    return Response(result, mimetype='application/json') # Devolver la respuesta como JSON
