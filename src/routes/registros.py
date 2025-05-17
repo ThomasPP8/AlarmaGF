@@ -1,12 +1,12 @@
 from flask import Blueprint
-from services.services import create_registro
+from services.services import create_registro, get_all_registros
 
 registros_bp = Blueprint('registros', __name__)
 
 # Obtener todos los registros
 @registros_bp.route('/', methods=['GET'])
 def obtener_todos_los_registros():
-    return "todos los registros"
+    return get_all_registros()
 
 # Obtener un registro por id
 @registros_bp.route('/<id>', methods=['GET'])
