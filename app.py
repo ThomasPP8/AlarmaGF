@@ -26,7 +26,8 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 # Ruta principal (puedes mantener el index.html si lo necesitas)
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return "API Flask WebSocket funcionando 🚀", 200
+
 
 # Registrar rutas del blueprint
 app.register_blueprint(registros_bp, url_prefix='/registros')
