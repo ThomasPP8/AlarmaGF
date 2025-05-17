@@ -38,3 +38,27 @@ def get_registro_by_id(id):
     data = mongo.db.registros.find_one({'_id': ObjectId(id)})
     result = json_util.dumps(data) # Convertir a JSON
     return Response(result, mimetype='application/json') # Devolver la respuesta como JSON
+
+# Funcion para actualizar un registro
+def update_registro(id):
+    data = request.get_json()
+
+    if not data: # Verificar si el payload está vacío
+        return jsonify({'error': 'Payload inválido'}), 400
+
+    try:
+        response = mongo.db.registros.update_one(
+            {'_id': ObjectId(id)},
+            {'$set': data}
+        ) # Actualizar el registro
+
+        if response.matched_count == 0: # Verificar si se encontró el registro
+            return jsonify({'error': 'Registro no encontrado'}), 404
+
+        return jsonify({ 
+            'message': 'Registro actualizado' if response.modified_count > 0 else 'Datos iguales, sin cambios', 
+            'modificado': response.modified_count > 0
+        }), 200
+
+    except Exception as e: # Manejar excepciones
+        return jsonify({'error': str(e)}), 400

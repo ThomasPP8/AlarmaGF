@@ -1,5 +1,11 @@
 from flask import Blueprint
-from services.services import create_registro, get_all_registros, get_registro_by_id
+#from services.services import create_registro, get_all_registros, get_registro_by_id, update_registro
+from services.services import (
+    create_registro,
+    get_all_registros,
+    get_registro_by_id,
+    update_registro,
+)
 
 registros_bp = Blueprint('registros', __name__)
 
@@ -21,7 +27,7 @@ def crear_registro():
 # Actualizar registro
 @registros_bp.route('/<id>', methods=['PUT'])
 def actualizar_registro(id):  # <- aquí se añadió `id`
-    return f"actualizar registro con ID: {id}"
+    return update_registro(id)
 
 # Eliminar registro
 @registros_bp.route('/<id>', methods=['DELETE'])
