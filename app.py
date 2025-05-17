@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_socketio import SocketIO
 from dotenv import load_dotenv
 import os
+import time
 
 from config.mongodb import mongo
 from routes.registros import registros_bp
@@ -26,6 +27,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 # Ruta principal (puedes mantener el index.html si lo necesitas)
 @app.route('/')
 def home():
+    time.sleep(1)
     return "API Flask WebSocket funcionando 🚀", 200
 
 
@@ -47,4 +49,4 @@ def on_mensaje(data):
 
 # Iniciar la app con WebSocket
 if __name__ == "__main__":
-    socketio.run(app, host="0.0.0.0", port=5000, allow_unsafe_werkzeug=True)
+    socketio.run(app, host="0.0.0.0", port=5000, allow_unsafe_werkzeug=True, threaded=True)
