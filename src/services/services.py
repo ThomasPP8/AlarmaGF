@@ -6,18 +6,21 @@ from config.mongodb import mongo
 
 def create_registro():
     data = request.get_json()
-    valor = data.get('valor', None)
-    estado = data.get('estado', None)
+    titulo = data.get('titulo', None)
+    valor = data.get('valor')
+    estado = data.get('estado')
     if valor or estado:
         response = mongo.db.registros.insert_one({
-            'valor': valor,
+            'titulo': titulo,
+            'valor': int(valor),
             'estado': estado
         })
         result = {
-            id: int(response.inserted_id),
+            'id': str(response.inserted_id),
+            'titulo': titulo,
             'valor': valor, 
             'estado': estado
         }
-        return result
+        return jsonify(result), 201
     else:
-        return jsonify({"error": "error datos"}), 400
+        return jsonify({"error": "faltan datos"}), 400
