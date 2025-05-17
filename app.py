@@ -21,7 +21,7 @@ print("MONGO_URI:", app.config['MONGO_URI'])  # SOLO PARA DEBUG
 mongo.init_app(app)
 
 # Inicializar SocketIO
-socketio = SocketIO(app, cors_allowed_origins="*")
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 
 # Ruta principal (puedes mantener el index.html si lo necesitas)
 @app.route('/')
@@ -46,6 +46,4 @@ def on_mensaje(data):
 
 # Iniciar la app con WebSocket
 if __name__ == "__main__":
-    from gevent import monkey
-    monkey.patch_all()
     socketio.run(app, host="0.0.0.0", port=5000)
