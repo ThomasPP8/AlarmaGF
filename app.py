@@ -28,7 +28,7 @@ socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')
 @app.route('/')
 def home():
     time.sleep(1)
-    return "API Flask WebSocket funcionando 🚀", 200
+    return "API Flask WebSocket funcionando", 200
 
 
 # Registrar rutas del blueprint
