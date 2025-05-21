@@ -20,6 +20,14 @@ app.config['MONGO_URI'] = os.getenv('MONGO_URI')
 print("MONGO_URI:", app.config['MONGO_URI'])  # SOLO PARA DEBUG
 
 mongo.init_app(app)
+try:
+    mongo.cx.server_info()  # Esto forza conexión y lanza error si falla
+    print(" Conexión a MongoDB exitosa.")
+except Exception as e:
+    print(" Error al conectar con MongoDB:", e)
+    
+print("mongo.db:", mongo.db)
+
 
 # Inicializar SocketIO
 socketio = SocketIO(app, cors_allowed_origins="*", async_mode='threading')

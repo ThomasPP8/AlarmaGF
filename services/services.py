@@ -28,6 +28,8 @@ def create_registro():
 
 # Funcion para obtener todos los registros
 def get_all_registros():
+    if mongo.db is None:
+        return jsonify({"error": "mongo.db es None. Revisa tu conexión y configuración."}), 500
     data = mongo.db.registros.find()
     result = json_util.dumps(data) # Convertir a JSON
     return Response(result, mimetype='application/json') # Devolver la respuesta como JSON
